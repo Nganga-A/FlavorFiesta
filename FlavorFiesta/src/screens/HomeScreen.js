@@ -90,7 +90,7 @@ const HomeScreen = () => {
 
           {/* categories */}
             <View>
-          { Categories.length>0 && <Categories categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} handleChangeCategory={handleChangeCategory} /> }
+          { Categories.length>0 && <Categories categories={categories} activeCategory={activeCategory} handleChangeCategory={handleChangeCategory} /> }
 
         {/* recipes */}
         <View>
