@@ -1,10 +1,52 @@
 import { View, Text, StatusBar, ScrollView, Image, TextInput } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {BellIcon, MagnifyingGlassIcon} from 'react-native-heroicons/outline'
 import Categories from '../components/Categories';
+import axios from 'axios';
 
 const HomeScreen = () => {
+
+  const [activeCategory, setActiveCategory] = useState('Beef');
+  const [categories, setCategories] = useState([]);
+  const [meals, setMeals] = useState([]);
+
+    useEffect(()=>{
+      getCategories();
+    },[])
+
+    const handleChangeCategory = category=>{
+      getRecipes(category);
+      setActiveCategory(category);
+      setMeals([]);
+    }
+
+    //get categories
+    const getCategories = async () => {
+      try{
+        const response = await axios.get('https://themealdb.com/api/json/v1/1/categories.php');
+        // console.log('got categories: ',response.data);
+        if(response && response.data){
+          setCategories(response.data.categories);
+        }
+      }catch(err){
+        console.log('error: ',err.message);
+      }
+    }
+
+
+  // const getRecipes = async (category="Beef")=>{
+  //   try{
+  //     const response = await axios.get(`https://themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+  //     // console.log('got recipes: ',response.data);
+  //     if(response && response.data){
+  //       setMeals(response.data.meals);
+  //     }
+  //   }catch(err){
+  //     console.log('error: ',err.message);
+  //   }
+  // }
+
   return (
     <View className="flex-1 bg-white">   
       <StatusBar style="dark"/>
@@ -46,7 +88,7 @@ const HomeScreen = () => {
 
           {/* categories */}
             <View>
-          { Categories.length>0 && <Categories categories={categories} activeCategory={activeCategory} handleChangeCategory={handleChangeCategory} /> }
+          { Categories.length>0 && <Categories categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} handleChangeCategory={handleChangeCategory} /> }
 
         </View>
       </ScrollView>
