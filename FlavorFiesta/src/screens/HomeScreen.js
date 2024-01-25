@@ -55,7 +55,7 @@ const HomeScreen = () => {
       <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{paddingBottom:50}}
-      className="space-y-6 pt-14"
+      className="space-y-6 pt-7"
       >
 
         {/*Avatar and bell icon*/}
