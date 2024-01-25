@@ -2,6 +2,7 @@ import { View, Text, StatusBar, ScrollView, Image, TextInput } from 'react-nativ
 import React from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {BellIcon, MagnifyingGlassIcon} from 'react-native-heroicons/outline'
+import Categories from '../components/Categories';
 
 const HomeScreen = () => {
   return (
@@ -45,8 +46,8 @@ const HomeScreen = () => {
 
           {/* categories */}
             <View>
-          { categories.length>0 && <Categories categories={categories} activeCategory={activeCategory} handleChangeCategory={handleChangeCategory} /> }
-          
+          { Categories.length>0 && <Categories categories={categories} activeCategory={activeCategory} handleChangeCategory={handleChangeCategory} /> }
+
         </View>
       </ScrollView>
     </View>
