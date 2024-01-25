@@ -50,7 +50,7 @@ const HomeScreen = () => {
     }
 
   return (
-    <View className="flex-1 bg-white">   
+    <View style={{backgroundColor: '#F0F8FF' }} className="flex-1">   
       <StatusBar style="dark"/>
       <ScrollView
       showsVerticalScrollIndicator={false}
