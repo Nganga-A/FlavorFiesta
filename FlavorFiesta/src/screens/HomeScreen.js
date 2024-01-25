@@ -4,6 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {BellIcon, MagnifyingGlassIcon} from 'react-native-heroicons/outline'
 import Categories from '../components/Categories';
 import axios from 'axios';
+import Recipes from '../components/Recipes';
 
 const HomeScreen = () => {
 
@@ -13,6 +14,7 @@ const HomeScreen = () => {
 
     useEffect(()=>{
       getCategories();
+      getRecipes();
     },[])
 
     const handleChangeCategory = category=>{
@@ -34,18 +36,18 @@ const HomeScreen = () => {
       }
     }
 
-
-  // const getRecipes = async (category="Beef")=>{
-  //   try{
-  //     const response = await axios.get(`https://themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-  //     // console.log('got recipes: ',response.data);
-  //     if(response && response.data){
-  //       setMeals(response.data.meals);
-  //     }
-  //   }catch(err){
-  //     console.log('error: ',err.message);
-  //   }
-  // }
+    //get recipes
+    const getRecipes = async (category="Beef")=>{
+      try{
+        const response = await axios.get(`https://themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+        // console.log('got recipes: ',response.data);
+        if(response && response.data){
+          setMeals(response.data.meals);
+        }
+      }catch(err){
+        console.log('error: ',err.message);
+      }
+    }
 
   return (
     <View className="flex-1 bg-white">   
