@@ -39,8 +39,14 @@ const HomeScreen = () => {
             className="flex-1 text-base mb-1 pl-3 tracking-wider"
           />
           <View className="bg-white rounded-full p-3">
-            <MagnifyingGlassIcon size={hp(2.5)} strokeWidth={1} color="gray" />
+            <MagnifyingGlassIcon size={hp(2.5)} strokeWidth={3} color="gray" />
           </View>
+        </View>
+
+          {/* categories */}
+            <View>
+          { categories.length>0 && <Categories categories={categories} activeCategory={activeCategory} handleChangeCategory={handleChangeCategory} /> }
+          
         </View>
       </ScrollView>
     </View>
