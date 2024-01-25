@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image } from 'expo-image';
 
-
 export const CachedImage = (props) => {
     const { uri } = props;
   

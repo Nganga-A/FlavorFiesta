@@ -5,7 +5,7 @@ import MasonryList from '@react-native-seoul/masonry-list';
 import { mealData } from '../constants';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import Loading from './Loading';
-// import { CachedImage } from '../helpers/image';
+import { CachedImage } from '../helpers/CachedImage';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Recipes({categories, meals}) {
