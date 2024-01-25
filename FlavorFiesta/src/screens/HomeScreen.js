@@ -90,6 +90,11 @@ const HomeScreen = () => {
             <View>
           { Categories.length>0 && <Categories categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} handleChangeCategory={handleChangeCategory} /> }
 
+        {/* recipes */}
+        <View>
+          <Recipes meals={meals} categories={categories} />
+        </View>
+
         </View>
       </ScrollView>
     </View>
