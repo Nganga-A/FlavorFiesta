@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Linking } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { CachedImage } from '../helpers/CachedImage';
@@ -28,6 +28,7 @@ export default function RecipeDetailScreen(props) {
         getMealData(item.idMeal);
     },[])
 
+    
     const getMealData = async (id)=>{
         try{
           const response = await axios.get(`https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
