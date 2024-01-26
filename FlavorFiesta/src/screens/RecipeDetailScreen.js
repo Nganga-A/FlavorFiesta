@@ -104,7 +104,7 @@ return (
         <View className="flex-row justify-center">
             <CachedImage
                 uri={item.strMealThumb}
-                // sharedTransitionTag={item.strMeal} // this will only work on native image (now using Image from expo-image)
+                sharedTransitionTag={item.strMeal} 
                 style={{width: wp(100), height: hp(50),borderBottomLeftRadius: 40, borderBottomRightRadius: 40}}
 
             />

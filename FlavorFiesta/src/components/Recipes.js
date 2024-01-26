@@ -53,6 +53,7 @@ const RecipeCard = ({item, index, navigation})=>{
                     source={{uri: item.strMealThumb}}
                     style={{width: '100%', height: index%3==0? hp(20): hp(35), borderRadius: 35}} //for every third imagedifferent layout
                     className="bg-black/5"
+                    sharedTransitionTag={item.strMeal} 
                 />
                 {/* <CachedImage
                     uri= {item.strMealThumb}
