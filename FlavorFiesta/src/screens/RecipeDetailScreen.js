@@ -10,10 +10,10 @@ import axios from 'axios';
 import Loading from '../components/Loading';
 import YouTubeIframe from 'react-native-youtube-iframe';
 import Animated, { FadeInDown, FadeIn } from 'react-native-reanimated';
-import { Platform } from 'react-native';
+// import { Platform } from 'react-native';
 
 
-const ios = Platform.OS=='ios';
+// const ios = Platform.OS=='ios';
 
 
 export default function RecipeDetailScreen(props) {
@@ -64,12 +64,35 @@ export default function RecipeDetailScreen(props) {
         return null;
     }
 
-    //Open the url
-    const handleOpenLink = url=>{
-        Linking.openURL(url);
-    }
+    // //Open the url
+    // const handleOpenLink = url=>{
+    //     Linking.openURL(url);
+    // }
 
-  return (
+    //render youtube iframe
+    const renderRecipeVideo = () => {
+        if (meal.strYoutube) {
+            return (
+                <Animated.View entering={FadeInDown.delay(400).duration(700).springify().damping(12)} className="space-y-4">
+                    <Text style={{ fontSize: hp(2.5) }} className="font-bold flex-1 text-neutral-700">
+                        Recipe Video
+                    </Text>
+                    <View>
+                        <YouTubeIframe
+                            webViewProps={{
+                                overScrollMode: 'never',
+                            }}
+                            videoId={getYoutubeVideoId(meal.strYoutube)}
+                            height={hp(30)}
+                        />
+                    </View>
+                </Animated.View>
+            );
+        }
+        return null;
+    };
+
+return (
     <View className="flex-1 bg-white relative">
         <StatusBar style={"light"} />
         <ScrollView
@@ -224,14 +247,16 @@ export default function RecipeDetailScreen(props) {
                     </Animated.View>
 
                     {/* recipe video */}
-                    {
+                    {renderRecipeVideo()}
+                    {/*
+                    { 
                         meal.strYoutube && (
                             <Animated.View entering={FadeInDown.delay(400).duration(700).springify().damping(12)} className="space-y-4">
                                 <Text style={{fontSize: hp(2.5)}} className="font-bold flex-1 text-neutral-700">
                                     Recipe Video
                                 </Text>
                                 <View>
-                                    {/* YoutubeIframe uses webview and it does not work properly on android (until its fixed we'll just show the video on ios) */}
+                                    //YoutubeIframe uses webview and it does not work properly on android (until its fixed we'll just show the video on ios)
                                     {
                                         ios? (
                                             <YouTubeIframe
@@ -253,6 +278,7 @@ export default function RecipeDetailScreen(props) {
                             </Animated.View>
                         )
                     }
+                  */}
                 </View>
             )
         }
