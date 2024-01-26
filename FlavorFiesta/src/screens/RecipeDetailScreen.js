@@ -11,10 +11,9 @@ import Loading from '../components/Loading';
 import YouTubeIframe from 'react-native-youtube-iframe';
 import Animated, { FadeInDown, FadeIn } from 'react-native-reanimated';
 import { Platform } from 'react-native';
-// import * as Linking from 'expo-linking';
+
 
 const ios = Platform.OS=='ios';
-
 
 
 export default function RecipeDetailScreen(props) {
@@ -31,17 +30,18 @@ export default function RecipeDetailScreen(props) {
     
     const getMealData = async (id)=>{
         try{
-          const response = await axios.get(`https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const response = await axios.get(`https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
         //   console.log('got meal data: ',response.data);
-          if(response && response.data){
+        if(response && response.data){
             setMeal(response.data.meals[0]);
             setLoading(false);
-          }
+        }
         }catch(err){
-          console.log('error: ',err.message);
+        console.log('error: ',err.message);
         }
     }
 
+    //Get the ingredients
     const ingredientsIndexes = (meal)=>{
         if(!meal) return [];
         let indexes = [];
@@ -58,11 +58,12 @@ export default function RecipeDetailScreen(props) {
         const regex = /[?&]v=([^&]+)/;
         const match = url.match(regex);
         if (match && match[1]) {
-          return match[1];
+            return match[1];
         }
         return null;
     }
 
+    //Open the url
     const handleOpenLink = url=>{
         Linking.openURL(url);
     }
@@ -113,6 +114,7 @@ export default function RecipeDetailScreen(props) {
 
                     {/* misc */}
                     <Animated.View entering={FadeInDown.delay(100).duration(700).springify().damping(12)} className="flex-row justify-around">
+                        {/* Time */}
                         <View className="flex rounded-full bg-amber-300 p-2">
                             <View 
                                 style={{height: hp(6.5), width: hp(6.5)}}
@@ -129,6 +131,8 @@ export default function RecipeDetailScreen(props) {
                                 </Text>
                             </View>
                         </View>
+
+                        {/* Servings */}
                         <View className="flex rounded-full bg-amber-300 p-2">
                             <View 
                                 style={{height: hp(6.5), width: hp(6.5)}}
@@ -145,6 +149,8 @@ export default function RecipeDetailScreen(props) {
                                 </Text>
                             </View>
                         </View>
+
+                        {/* calories */}
                         <View className="flex rounded-full bg-amber-300 p-2">
                             <View 
                                 style={{height: hp(6.5), width: hp(6.5)}}
@@ -161,6 +167,8 @@ export default function RecipeDetailScreen(props) {
                                 </Text>
                             </View>
                         </View>
+
+                        {/* Cooking Level */}
                         <View className="flex rounded-full bg-amber-300 p-2">
                             <View 
                                 style={{height: hp(6.5), width: hp(6.5)}}
@@ -189,7 +197,7 @@ export default function RecipeDetailScreen(props) {
                                 ingredientsIndexes(meal).map(i=>{
                                     return (
                                         <View key={i} className="flex-row space-x-4">
-                                            <View style={{height: hp(1.5), width: hp(1.5)}}
+                                            <View style={{height: hp(1.5), width: hp(1.5)}} //acts as bullets
                                                 className="bg-amber-300 rounded-full" />
                                             <View className="flex-row space-x-2">
                                                     <Text style={{fontSize: hp(1.7)}} className="font-extrabold text-neutral-700">{meal['strMeasure'+i]}</Text>
@@ -201,6 +209,7 @@ export default function RecipeDetailScreen(props) {
                             }
                         </View>
                     </Animated.View>
+
                     {/* instructions */}
                     <Animated.View entering={FadeInDown.delay(300).duration(700).springify().damping(12)} className="space-y-4">
                         <Text style={{fontSize: hp(2.5)}} className="font-bold flex-1 text-neutral-700">
@@ -214,7 +223,6 @@ export default function RecipeDetailScreen(props) {
                     </Animated.View>
 
                     {/* recipe video */}
-
                     {
                         meal.strYoutube && (
                             <Animated.View entering={FadeInDown.delay(400).duration(700).springify().damping(12)} className="space-y-4">
@@ -244,8 +252,6 @@ export default function RecipeDetailScreen(props) {
                             </Animated.View>
                         )
                     }
-
-
                 </View>
             )
         }
