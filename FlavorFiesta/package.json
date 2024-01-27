@@ -17,6 +17,7 @@
     "axios": "^1.6.7",
     "eas-cli": "^7.0.0",
     "expo": "~50.0.3",
+    "expo-cli": "^6.3.10",
     "expo-image": "~1.10.5",
     "expo-status-bar": "~1.11.1",
     "init": "^0.1.2",
