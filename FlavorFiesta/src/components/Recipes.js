@@ -16,21 +16,23 @@ export default function Recipes({categories, meals, searchTerm}) {
     <View className="mx-4 space-y-3 my-4">
         <Text style={{fontSize: hp(3)}} className="font-semibold text-neutral-600">Recipes</Text>
         <View>
-            {
-            categories.length === 0 || meals === null ? (
-            <Loading size="large" className="mt-20" />
-            ) : meals.length === 0 ? (
-            <Text>No recipes found for "{searchTerm}". Try a different search term.</Text>
+        {
+            categories.length === 0 || (meals === null || meals?.length === 0) && searchTerm.trim() === '' ? (
+                <Loading size="large" className="mt-20" />
+            ) : !meals && searchTerm.trim() !== ''  ? (
+                <Text style={{fontSize: hp(2.3)}}>No recipes found for ' {searchTerm} '. Try a different recipe.</Text>
             ) : (
-            <MasonryList
-            data={meals}
-            keyExtractor={(item) => item.idMeal}
-            numColumns={2}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item, i }) => <RecipeCard item={item} index={i} navigation={navigation} />}
-            onEndReachedThreshold={0.1}
-            />
-        )}
+                <MasonryList
+                    data={meals}
+                    keyExtractor={(item) => item.idMeal}
+                    numColumns={2}
+                    showsVerticalScrollIndicator={false}
+                    renderItem={({ item, i }) => <RecipeCard item={item} index={i} navigation={navigation} />}
+                    onEndReachedThreshold={0.1}
+                />
+            )
+        }
+
             
         </View>
     </View>

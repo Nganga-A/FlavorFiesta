@@ -43,15 +43,9 @@ const HomeScreen = () => {
     const getSearchRecipe = async () => {
       try {
         setLoading(true);
-    
-        // If the search term is empty, fetch recipes for the default category
-        if (!searchTerm) {
-          await getRecipes();
-        } else {
-          const response = await axios.get(`https://themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
-          if (response && response.data) {
-            setMeals(response.data.meals);
-          }
+        const response = await axios.get(`https://themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
+        if (response && response.data) {
+          setMeals(response.data.meals);
         }
       } catch (err) {
         console.log('error: ', err.message);
@@ -113,12 +107,12 @@ const HomeScreen = () => {
               // Check if the text is empty and fetch recipes for the default category
               // Check if the text is empty and show loading before fetching recipes
               if (!text.trim()) {
-                setLoading(true);
+                // setLoading(true);
                 getRecipes()
                   .then(() => setLoading(false))
                   .catch((error) => {
                     console.error('Error fetching recipes:', error);
-                    setLoading(false);
+                    // setLoading(false);
                   });
               }
             }}
