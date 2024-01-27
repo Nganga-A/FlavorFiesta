@@ -36,8 +36,8 @@ export default function WelcomeScreen() {
 
         {/* tittle and punchline */}
         <View className="flex items-center space-y-2">
-            <Text style={{fontSize: hp(7)}} className="font-bold text-white tracking-widest">
-                Foody
+            <Text style={{fontSize: hp(6)}} className="font-bold text-white tracking-widest">
+                FlavorFiesta
             </Text>
             <Text style={{fontSize: hp(2)}}  className="font-medium text-white tracking-widest text-lg">
                 Food is always right

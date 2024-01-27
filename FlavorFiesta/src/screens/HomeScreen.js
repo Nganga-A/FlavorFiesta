@@ -85,7 +85,7 @@ const HomeScreen = () => {
 
         {/* greetings and punchline */}
         <View className="mx-4 space-y-2 mb-2">
-          <Text style={{fontSize: hp(2.5)}} className="text-neutral-600">Hello, Abed!</Text>
+          <Text style={{fontSize: hp(2.5)}} className="text-neutral-600">Hello, User!</Text>
           <View>
             <Text style={{fontSize: hp(3.8)}} className="font-semibold text-neutral-600">Make your own food,</Text>
           </View>
