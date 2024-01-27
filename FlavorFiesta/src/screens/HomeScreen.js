@@ -1,16 +1,19 @@
-import { View, Text, StatusBar, ScrollView, Image, TextInput } from 'react-native'
+import { View, Text, StatusBar, ScrollView, Image, TextInput, TouchableOpacity,ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {BellIcon, MagnifyingGlassIcon} from 'react-native-heroicons/outline'
 import Categories from '../components/Categories';
 import axios from 'axios';
 import Recipes from '../components/Recipes';
+import Loading from '../components/Loading';
 
 const HomeScreen = () => {
 
   const [activeCategory, setActiveCategory] = useState('Beef');
   const [categories, setCategories] = useState([]);
   const [meals, setMeals] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(false); 
 
     useEffect(()=>{
       getCategories();
@@ -35,6 +38,22 @@ const HomeScreen = () => {
         console.log('error: ',err.message);
       }
     }
+
+    // New function for searching recipes
+    const getSearchRecipe = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`https://themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
+        if (response && response.data) {
+          setMeals(response.data.meals);
+        }
+      } catch (err) {
+        console.log('error: ', err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
 
     //get recipes
     const getRecipes = async (category="Beef")=>{
@@ -82,10 +101,15 @@ const HomeScreen = () => {
             placeholderTextColor={'gray'}
             style={{fontSize: hp(2)}}
             className="flex-1 text-base mb-1 pl-3 tracking-wider"
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text)}
+            onSubmitEditing={getSearchRecipe}
           />
-          <View className="bg-white rounded-full p-3">
-            <MagnifyingGlassIcon size={hp(2.5)} strokeWidth={3} color="gray" />
-          </View>
+          <TouchableOpacity onPress={() => getSearchRecipe(searchTerm)}>
+            <View className="bg-white rounded-full p-3">
+              <MagnifyingGlassIcon size={hp(2.5)} strokeWidth={3} color="gray" />
+            </View>
+          </TouchableOpacity>
         </View>
 
           {/* categories */}
@@ -94,8 +118,11 @@ const HomeScreen = () => {
 
         {/* recipes */}
         <View>
-          <Recipes meals={meals} categories={categories} />
+          <Recipes meals={meals} categories={categories} searchTerm={searchTerm} />
         </View>
+
+                {/* Loader */}
+                {loading && <Loading size="large" className="mt-20" />}
 
         </View>
       </ScrollView>
