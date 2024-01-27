@@ -2,6 +2,7 @@
   "expo": {
     "name": "FlavorFiesta",
     "slug": "FlavorFiesta",
+    "description": "Your go-to mobile app for delightful and diverse recipes that will tantalize your taste buds. Get ready to embark on a culinary journey like never before!",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
