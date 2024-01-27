@@ -43,9 +43,15 @@ const HomeScreen = () => {
     const getSearchRecipe = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`https://themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
-        if (response && response.data) {
-          setMeals(response.data.meals);
+    
+        // If the search term is empty, fetch recipes for the default category
+        if (!searchTerm) {
+          await getRecipes();
+        } else {
+          const response = await axios.get(`https://themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
+          if (response && response.data) {
+            setMeals(response.data.meals);
+          }
         }
       } catch (err) {
         console.log('error: ', err.message);
@@ -102,9 +108,23 @@ const HomeScreen = () => {
             style={{fontSize: hp(2)}}
             className="flex-1 text-base mb-1 pl-3 tracking-wider"
             value={searchTerm}
-            onChangeText={(text) => setSearchTerm(text)}
+            onChangeText={(text) => {
+              setSearchTerm(text);
+              // Check if the text is empty and fetch recipes for the default category
+              // Check if the text is empty and show loading before fetching recipes
+              if (!text.trim()) {
+                setLoading(true);
+                getRecipes()
+                  .then(() => setLoading(false))
+                  .catch((error) => {
+                    console.error('Error fetching recipes:', error);
+                    setLoading(false);
+                  });
+              }
+            }}
             onSubmitEditing={getSearchRecipe}
           />
+
           <TouchableOpacity onPress={() => getSearchRecipe(searchTerm)}>
             <View className="bg-white rounded-full p-3">
               <MagnifyingGlassIcon size={hp(2.5)} strokeWidth={3} color="gray" />
