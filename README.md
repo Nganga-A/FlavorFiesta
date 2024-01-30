@@ -1,1 +1,2 @@
-# FlavorFiesta
+# FlavorFiesta     [![React Native](https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactnative.dev/)
+Food recipe mobile app built with react native that blends functionality, style, and convenience to make the cooking journey enjoyable for users of all levels
